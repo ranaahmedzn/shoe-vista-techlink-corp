@@ -13,6 +13,8 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use('/api', router)
+
 const PORT = process.env.PORT || 5000;
 
 const connectDB = async () => {
@@ -28,6 +30,10 @@ const connectDB = async () => {
 const startServer = async () => {
   try {
     await connectDB();
+    app.get('/', (_, res) => {
+      res.send('App is running')
+    })
+
     app.listen(PORT, () => {
       console.log(`App is listening on port ${PORT}`);
     });
